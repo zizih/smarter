@@ -24,10 +24,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SaveHistory extends Activity {
 
@@ -84,7 +86,7 @@ public class SaveHistory extends Activity {
 
 		private void doReset() {
 			Builder builder = new AlertDialog.Builder(SaveHistory.this);
-			builder.setTitle("do you want to save the last setting ?");
+			builder.setTitle("do you want to save the last setting ?\n or directly reset !");
 			builder.setPositiveButton("yes",
 					new DialogInterface.OnClickListener() {
 
@@ -117,7 +119,16 @@ public class SaveHistory extends Activity {
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
+					Toast.makeText(SaveHistory.this, "你点击了该记录\n长按你不能将该设置设置为当前设置", Toast.LENGTH_LONG).show();
+				}
+			});
+			listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					doReset();
+					return false;
 				}
 			});
 		}
@@ -135,24 +146,23 @@ public class SaveHistory extends Activity {
 					System.out.println(i++);
 					System.out.println(history.getHOUR() + history.getMINUTE());
 					values = new HashMap<String, Object>();
-					values.put("on_status", "打开状态 " + history.isON() + ":"
-							+ history.getONTIME());
-					values.put("off_status", "关闭状态 " + history.isOFF() + ":"
-							+ history.getOFFTIME());
+					values.put("on_status", "ON状态\n" + history.isON() + " 时间:"+ history.getONTIME()+" 携带的信息:"+ history.getONCONTENT());
+					values.put("off_status", "OFF状态\n" + history.isOFF() + " 时间:"
+							+ history.getOFFTIME()+" 携带的信息:" +history.getOFFCONTENT());
 					values.put("phone",
-							"发送到对方的号码 "
+							"发送到对方的号码:"
 									+ (history.getPHONE() == -1 ? "no seeted"
 											: history.getPHONE()));
 					values.put(
 							"time",
-							"预约时间 "
+							"预约时间:"
 									+ (history.getHOUR() >= 10 ? history
 											.getHOUR() : "0"
 											+ history.getHOUR())
 									+ ":"
 									+ (history.getMINUTE() >= 10 ? history
 											.getMINUTE() : "0"
-											+ history.getMINUTE()));
+											+ history.getMINUTE())+"  携带的信息:"+history.getTIMECONTENT());
 					list.add(values);
 				}
 				dbHelper.close();

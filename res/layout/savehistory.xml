@@ -65,15 +65,12 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingLeft="20dip"
-        android:paddingRight="20dip" >
+        android:orientation="vertical" >
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/list_view_border"
             android:divider="#FFFFFF"
             android:padding="5dip" >
         </ListView>

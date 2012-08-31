@@ -67,12 +67,13 @@ public class Main extends ActivityGroup {
 			this.finish();
 			break;
 		case HELP_ITEM:
-			TextView tView =new TextView(Main.this);
+			TextView tView = new TextView(Main.this);
 			tView.setPadding(25, 25, 25, 25);
-			tView.setTextSize(20);
+			tView.setTextSize(18);
 			tView.setTextColor(Color.GREEN);
-			tView.setText("每个带*号的按钮都会按照设置好的号码发送一个指令（短信代替）");
-			new AlertDialog.Builder(Main.this).setTitle("help").setView(tView).setNegativeButton("cancle", null).create().show();
+			tView.setText(getResources().getString(R.string.help));
+			new AlertDialog.Builder(Main.this).setTitle("help").setView(tView)
+					.setNegativeButton("cancle", null).create().show();
 			break;
 		}
 		return super.onOptionsItemSelected(item);

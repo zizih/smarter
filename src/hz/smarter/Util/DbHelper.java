@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		db.execSQL("create table sb (phone int(11) , _on int(2) ,on_time varchar(20) ,off int(2) ,off_time varchar(20) ,hour int(2) ,minute int(2))");
+		db.execSQL("create table sb (phone int(11) , _on int(2) ,on_time varchar(20), on_content varchar(20),off int(2) ,off_time varchar(20), off_content varchar(20),hour int(2) ,minute int(2),time_content varchar(20))");
 	}
 
 	@Override
@@ -50,10 +50,13 @@ public class DbHelper extends SQLiteOpenHelper {
 		cv.put("phone", history.getPHONE());
 		cv.put("_on", history.isON() ? 1 : -1);
 		cv.put("on_time", history.ONTIME);
+		cv.put("on_content", history.getONCONTENT());
 		cv.put("off", history.isOFF() ? 1 + "" : -1 + "");
 		cv.put("off_time", history.OFFTIME);
+		cv.put("off_content", history.getOFFCONTENT());
 		cv.put("hour", history.getHOUR());
 		cv.put("minute", history.getMINUTE());
+		cv.put("time_content", history.getTIMECONTENT());
 		db.insert("sb", null, cv);
 		db.close();
 
@@ -70,12 +73,18 @@ public class DbHelper extends SQLiteOpenHelper {
 				history.setON(cs.getInt(cs.getColumnIndex("_on")) == 1 ? true
 						: false);
 				history.setONTIME(cs.getString(cs.getColumnIndex("on_time")));
+				history.setONCONTENT(cs.getString(cs
+						.getColumnIndex("on_content")));
 				history.setOFF(cs.getInt(cs.getColumnIndex("off")) == 1 ? true
 						: false);
 				history.setOFFTIME(cs.getString(cs.getColumnIndex("off_time")));
+				history.setOFFCONTENT(cs.getString(cs
+						.getColumnIndex("off_content")));
 				history.setPHONE(cs.getInt(cs.getColumnIndex("phone")));
 				history.setHOUR(cs.getInt(cs.getColumnIndex("hour")));
 				history.setMINUTE(cs.getInt(cs.getColumnIndex("minute")));
+				history.setTIMECONTENT(cs.getString(cs
+						.getColumnIndex("time_content")));
 				cs.moveToNext();
 				list.add(history);
 			}
@@ -103,12 +112,16 @@ public class DbHelper extends SQLiteOpenHelper {
 			history.setON(cs.getInt(cs.getColumnIndex("_on")) == 1 ? true
 					: false);
 			history.setONTIME(cs.getString(cs.getColumnIndex("on_time")));
+			history.setONCONTENT(cs.getString(cs.getColumnIndex("on_content")));
 			history.setOFF(cs.getInt(cs.getColumnIndex("off")) == 1 ? true
 					: false);
 			history.setOFFTIME(cs.getString(cs.getColumnIndex("off_time")));
+			history.setOFFCONTENT(cs.getString(cs.getColumnIndex("off_content")));
 			history.setPHONE(cs.getInt(cs.getColumnIndex("phone")));
 			history.setHOUR(cs.getInt(cs.getColumnIndex("hour")));
 			history.setMINUTE(cs.getInt(cs.getColumnIndex("minute")));
+			history.setTIMECONTENT(cs.getString(cs
+					.getColumnIndex("time_content")));
 			return history;
 		}
 		cs.close();

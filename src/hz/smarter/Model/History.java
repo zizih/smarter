@@ -9,6 +9,9 @@ public class History {
 	public int MINUTE;
 	public String ONTIME;
 	public String OFFTIME;
+	public String ONCONTENT;
+	public String OFFCONTENT;
+	public String TIMECONTENT;
 
 	public History(boolean on, boolean off, int phone, int hour, int monute,
 			String on_time, String off_time) {
@@ -21,6 +24,33 @@ public class History {
 		setONTIME("00-00-00 00:00:00");
 		setHOUR(-1);
 		setPHONE(-1);
+		setONCONTENT("on");
+		setOFFCONTENT("off");
+		setTIMECONTENT("00:00");
+	}
+
+	public String getTIMECONTENT() {
+		return TIMECONTENT;
+	}
+
+	public void setTIMECONTENT(String tIMECONTENT) {
+		TIMECONTENT = tIMECONTENT;
+	}
+
+	public String getONCONTENT() {
+		return ONCONTENT;
+	}
+
+	public void setONCONTENT(String oNCONTENT) {
+		ONCONTENT = oNCONTENT;
+	}
+
+	public String getOFFCONTENT() {
+		return OFFCONTENT;
+	}
+
+	public void setOFFCONTENT(String oFFCONTENT) {
+		OFFCONTENT = oFFCONTENT;
 	}
 
 	public boolean isON() {

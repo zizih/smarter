@@ -15,6 +15,9 @@ public class HistorySingleton {
 		history.setONTIME("00-00-00 00:00:00");
 		history.setHOUR(-1);
 		history.setPHONE(-1);
+		history.setONCONTENT("on");
+		history.setOFFCONTENT("off");
+		history.setTIMECONTENT("00:00");
 	}
 
 }

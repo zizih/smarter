@@ -26,7 +26,7 @@ public class ViewUtil {
 
 	public TextView[] getTextViews(TextView[] tvs, int[] ids) {
 		for (int i = 0; i < tvs.length; i++) {
-			tvs[i] = (TextView) activity.findViewById(ids[i]);
+			tvs[i] = this.getTextView(tvs[i], ids[i]);
 		}
 		return tvs;
 	}
