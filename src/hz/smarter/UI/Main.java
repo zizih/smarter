@@ -29,7 +29,7 @@ public class Main extends ActivityGroup {
 		// LayoutInflater.from(this).inflate(layout.main,
 		// tabHost.getTabContentView(), true);
 		tabHost.setup(this.getLocalActivityManager());
-		tabHost.addTab(tabHost.newTabSpec("switch").setIndicator("开关")
+		tabHost.addTab(tabHost.newTabSpec("switch").setIndicator("控制")
 				.setContent(new Intent(this, Switcher.class)));
 		tabHost.addTab(tabHost.newTabSpec("timing").setIndicator("定時")
 				.setContent(new Intent(this, Timing.class)));

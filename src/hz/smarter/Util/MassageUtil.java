@@ -16,7 +16,7 @@ public class MassageUtil {
 	}
 
 	public void send(String content) {
-		if (HistorySingleton.getHistoryInstance().getPHONE() != -1) {
+		if (HistorySingleton.getHistoryInstance().getPHONE() != "") {
 			try {
 				SmsManager sManager = SmsManager.getDefault();
 				PendingIntent pi = PendingIntent.getActivity(activity, 0,

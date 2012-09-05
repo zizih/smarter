@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		db.execSQL("create table sb (phone int(11) , _on int(2) ,on_time varchar(20), on_content varchar(20),off int(2) ,off_time varchar(20), off_content varchar(20),hour int(2) ,minute int(2),time_content varchar(20))");
+		db.execSQL("create table sb (phone varchar(15), _on int(2) ,on_time varchar(20), on_content varchar(20),off int(2) ,off_time varchar(20), off_content varchar(20),hour int(2) ,minute int(2),time_content varchar(20))");
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
 				history.setOFFTIME(cs.getString(cs.getColumnIndex("off_time")));
 				history.setOFFCONTENT(cs.getString(cs
 						.getColumnIndex("off_content")));
-				history.setPHONE(cs.getInt(cs.getColumnIndex("phone")));
+				history.setPHONE(cs.getString(cs.getColumnIndex("phone")));
 				history.setHOUR(cs.getInt(cs.getColumnIndex("hour")));
 				history.setMINUTE(cs.getInt(cs.getColumnIndex("minute")));
 				history.setTIMECONTENT(cs.getString(cs
@@ -117,7 +117,7 @@ public class DbHelper extends SQLiteOpenHelper {
 					: false);
 			history.setOFFTIME(cs.getString(cs.getColumnIndex("off_time")));
 			history.setOFFCONTENT(cs.getString(cs.getColumnIndex("off_content")));
-			history.setPHONE(cs.getInt(cs.getColumnIndex("phone")));
+			history.setPHONE(cs.getString(cs.getColumnIndex("phone")));
 			history.setHOUR(cs.getInt(cs.getColumnIndex("hour")));
 			history.setMINUTE(cs.getInt(cs.getColumnIndex("minute")));
 			history.setTIMECONTENT(cs.getString(cs

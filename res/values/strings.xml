@@ -6,6 +6,7 @@
     <string name="title_activity_main">SmartBuilter</string>
     <string name="help">1.每个带*号的按钮都会按照设置好的号码发送一个指令（短信代替)\n
         2.“on、off、(timing)send”分别表示打开电器、关闭电器、预约时间\n
-        3.历史记录主要为了查看</string>
+        3.历史记录主要为了查看\n
+        4.不知道为什么输入长号会死，目前只有短号可行</string>
 
 </resources>

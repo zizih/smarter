@@ -25,12 +25,11 @@ public final class R {
     public static final class id {
         public static final int center=0x7f080006;
         public static final int content_view=0x7f080014;
-        public static final int edit=0x7f080008;
         public static final int history_view=0x7f08000e;
         public static final int item=0x7f080000;
         public static final int listView=0x7f08000f;
-        public static final int menu_settings=0x7f080017;
-        public static final int modify=0x7f080015;
+        public static final int menu_settings=0x7f080016;
+        public static final int modify=0x7f080008;
         public static final int off=0x7f080011;
         public static final int off_status_item=0x7f080003;
         public static final int on=0x7f080010;
@@ -39,7 +38,7 @@ public final class R {
         public static final int phone_item=0x7f080001;
         public static final int reset=0x7f08000d;
         public static final int save=0x7f08000c;
-        public static final int send=0x7f080016;
+        public static final int send=0x7f080015;
         public static final int set=0x7f080007;
         public static final int show=0x7f080009;
         public static final int status_view=0x7f080012;

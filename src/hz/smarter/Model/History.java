@@ -4,7 +4,7 @@ public class History {
 
 	public boolean ON;
 	public boolean OFF;
-	public int PHONE;
+	public String PHONE;
 	public int HOUR;
 	public int MINUTE;
 	public String ONTIME;
@@ -23,7 +23,7 @@ public class History {
 		setOFFTIME("00-00-00 00:00:00");
 		setONTIME("00-00-00 00:00:00");
 		setHOUR(-1);
-		setPHONE(-1);
+		setPHONE("");
 		setONCONTENT("on");
 		setOFFCONTENT("off");
 		setTIMECONTENT("00:00");
@@ -69,11 +69,11 @@ public class History {
 		OFF = oFF;
 	}
 
-	public int getPHONE() {
+	public String getPHONE() {
 		return PHONE;
 	}
 
-	public void setPHONE(int pHONE) {
+	public void setPHONE(String pHONE) {
 		PHONE = pHONE;
 	}
 

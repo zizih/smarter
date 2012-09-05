@@ -22,7 +22,7 @@ public class Phone extends Activity {
 
 	Button set, edit;
 	Button[] bus = { set, edit };
-	int[] ids = { R.id.set, R.id.edit };
+	int[] ids = { R.id.set, R.id.modify };
 	TextView tv;
 	ViewUtil viewUtil = new ViewUtil(Phone.this);
 	History history = HistorySingleton.getHistoryInstance();
@@ -46,11 +46,7 @@ public class Phone extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (history.getPHONE() != -1) {
-			tv.setText(history.PHONE + "");
-		} else {
-			tv.setText("");
-		}
+		tv.setText(history.PHONE + "");
 	}
 
 	class MyOnClickListener implements OnClickListener {
@@ -62,8 +58,8 @@ public class Phone extends Activity {
 			case R.id.set:
 				doSet();
 				break;
-			case R.id.edit:
-				doEdit();
+			case R.id.modify:
+				doModify();
 				break;
 			}
 		}
@@ -72,8 +68,8 @@ public class Phone extends Activity {
 			getBuilder("请输入对方的号码", null);
 		}
 
-		public void doEdit() {
-			if (new Integer(history.getPHONE()) != null) {
+		public void doModify() {
+			if (history.getPHONE() != "") {
 				getBuilder("修改号码", tv.getText().toString());
 			} else {
 				Toast.makeText(Phone.this, "你还没有进行任何的设置,请先设置",
@@ -84,6 +80,8 @@ public class Phone extends Activity {
 		public void getBuilder(String title, String etString) {
 			final EditText et = new EditText(Phone.this);
 			et.setText(etString);
+			et.setMaxWidth(20);
+			et.setSelectAllOnFocus(true);
 			et.setInputType(InputType.TYPE_CLASS_NUMBER);
 			builder = new AlertDialog.Builder(Phone.this);
 			builder.setTitle(title);
@@ -93,9 +91,10 @@ public class Phone extends Activity {
 
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
-							int num = Integer.parseInt(et.getText().toString());
-							history.PHONE = num;
-							tv.setText(num + "");
+							System.out.println("phone test...");
+							String phone = et.getText().toString();
+							history.PHONE = phone;
+							tv.setText(phone + "");
 						}
 					});
 			builder.setNegativeButton("取消", null);
