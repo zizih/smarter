@@ -1,10 +1,9 @@
 package hz.smarter.UI;
 
+import hz.smarter.R;
 import hz.smarter.Model.History;
-import hz.smarter.Model.HistorySingleton;
 import hz.smarter.Util.MassageUtil;
 import hz.smarter.Util.ViewUtil;
-import hz.smarter.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -16,16 +15,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Phone extends Activity {
 
-	Button set, edit;
-	Button[] bus = { set, edit };
-	int[] ids = { R.id.set, R.id.modify };
+	Button reset;
 	TextView tv;
-	ViewUtil viewUtil = new ViewUtil(Phone.this);
-	History history = HistorySingleton.getHistoryInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,66 +29,37 @@ public class Phone extends Activity {
 		/*
 		 * get buttons
 		 */
-		bus = viewUtil.getButtonViews(bus, ids);
-		for (Button bu : bus) {
-			bu.setOnClickListener(new MyOnClickListener());
-		}
-		tv = viewUtil.getTextView(tv, R.id.phoneView);
+		reset = (Button) findViewById(R.id.reset);
+		reset.setOnClickListener(new MyOnClickListener());
+		tv = (TextView) findViewById(R.id.phoneView);
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		tv.setText(history.PHONE + "");
+		tv.setText(History.PHONE);
 	}
 
 	class MyOnClickListener implements OnClickListener {
-		private Builder builder;
 
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			switch (arg0.getId()) {
-			case R.id.set:
-				doSet();
-				break;
-			case R.id.modify:
-				doModify();
-				break;
-			}
-		}
-
-		public void doSet() {
-			getBuilder("请输入对方的号码", null);
-		}
-
-		public void doModify() {
-			if (history.getPHONE() != "") {
-				getBuilder("修改号码", tv.getText().toString());
-			} else {
-				Toast.makeText(Phone.this, "你还没有进行任何的设置,请先设置",
-						Toast.LENGTH_SHORT).show();
-			}
-		}
-
-		public void getBuilder(String title, String etString) {
 			final EditText et = new EditText(Phone.this);
-			et.setText(etString);
+			et.setText(History.PHONE);
 			et.setMaxWidth(20);
 			et.setSelectAllOnFocus(true);
 			et.setInputType(InputType.TYPE_CLASS_NUMBER);
-			builder = new AlertDialog.Builder(Phone.this);
-			builder.setTitle(title);
+			Builder builder = new AlertDialog.Builder(Phone.this);
+			builder.setTitle("输入号码");
 			builder.setView(et);
 			builder.setPositiveButton("确定",
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
-							System.out.println("phone test...");
-							String phone = et.getText().toString();
-							history.PHONE = phone;
-							tv.setText(phone + "");
+							History.PHONE = et.getText().toString();
+							tv.setText(History.PHONE);
 						}
 					});
 			builder.setNegativeButton("取消", null);

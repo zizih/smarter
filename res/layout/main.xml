@@ -26,8 +26,9 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="fill_parent"
-                android:layout_height="35dip"
+                android:layout_height="50dip"
                 android:layout_alignParentBottom="true"
+                android:background="#EEEEEE"
                 android:gravity="bottom" >
             </TabWidget>
         </LinearLayout>

@@ -1,0 +1,17 @@
+create table sb 
+(
+id int(2),
+open int(2),
+open1 int(2),
+open2 int(2),
+open3 int(2),
+open4 int(2),
+close int(2),
+close1 int(2),
+close2 int(2),
+close3 int(2),
+close4 int(2),
+phone varchar(15), 
+hour int(2) ,
+minute int(2)
+)

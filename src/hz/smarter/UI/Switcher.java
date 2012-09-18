@@ -2,37 +2,30 @@ package hz.smarter.UI;
 
 import hz.smarter.R;
 import hz.smarter.Model.History;
-import hz.smarter.Model.HistorySingleton;
 import hz.smarter.Util.MassageUtil;
 import hz.smarter.Util.ViewUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class Switcher extends Activity {
 
-//	about button
-	Button on, off;
-	Button[] bus = { on, off };
-	int[] bu_ids = { R.id.on, R.id.off };
-//	about textView
-	TextView tv_status, tv_time,tv_content;
-	TextView[] tvs ={tv_status, tv_time,tv_content};
-	int[] tv_ids = { R.id.status_view,R.id.time_view,R.id.content_view };
-	ViewUtil viewUtil = new ViewUtil(Switcher.this);
-	History history = HistorySingleton.getHistoryInstance();
+	// about button
+	Button opendevice, open1, open2, open3, open4;
+	Button closedevice, close1, close2, close3, close4;
+	Button status, reset_prompt;
+	Button[] bus = { opendevice, open1, open2, open3, open4, closedevice,
+			close1, close2, close3, close4, status, reset_prompt };
+	int[] bu_ids = { R.id.opendevice, R.id.open1, R.id.open2, R.id.open3,
+			R.id.open4, R.id.closedevice, R.id.close1, R.id.close2,
+			R.id.close3, R.id.close4, R.id.status, R.id.reset_prompt };
+	TextView prompt;
+	private ViewUtil viewUtil = new ViewUtil(Switcher.this);
+	private MassageUtil massageUtil = new MassageUtil(Switcher.this);
+	StringBuilder builder = new StringBuilder();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,102 +40,133 @@ public class Switcher extends Activity {
 		for (Button bu : bus) {
 			bu.setOnClickListener(new MyOnClickListener());
 		}
-		tv_status=viewUtil.getTextView(tv_status, R.id.status_view);
-		tv_time=viewUtil.getTextView(tv_time, R.id.time_view);
-		tv_content=viewUtil.getTextView(tv_content,R.id.content_view);
+		prompt = (TextView) findViewById(R.id.prompt_view);
+		// open1.setBackgroundDrawable(Switcher.this.getResources()
+		// .getDrawable(R.drawable.bu_bg_black));
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (history.isON() || history.isOFF()) {
-			tv_status.setText(history.isON() ? "on" : "off");
-			tv_time.setText(history.isON() ? history.getONTIME() : history
-					.getOFFTIME());
-			tv_content.setText(history.getONCONTENT());
-		} else {
-			tv_status.setText("");
-			tv_time.setText("");
-			tv_content.setText("");
-		}
 	}
 
 	class MyOnClickListener implements OnClickListener {
-		private Builder builder;
-		private SimpleDateFormat sdf = new SimpleDateFormat(
-				"yyyy-mm-dd hh:mm:ss");
-		private String time = null;
 
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
 			switch (arg0.getId()) {
-			case R.id.on:
-				doOn();
+			case R.id.opendevice:
+				doOpenDevice();
 				break;
-			case R.id.off:
-				doOff();
+			case R.id.open1:
+				doOpenLed1();
+				break;
+			case R.id.open2:
+				doOpenLed2();
+				break;
+			case R.id.open3:
+				doOpenLed3();
+				break;
+			case R.id.open4:
+				doOpenLed4();
+				break;
+			case R.id.closedevice:
+				doCloseDevice();
+				break;
+			case R.id.close1:
+				doCloseLed1();
+				break;
+			case R.id.close2:
+				doCloseLed2();
+				break;
+			case R.id.close3:
+				doCloseLed3();
+				break;
+			case R.id.close4:
+				doCloseLed4();
+				break;
+			case R.id.status:
+				doStatus();
+				break;
+			case R.id.reset_prompt:
+				doResetPrompt();
 				break;
 			}
 		}
 
-		public void doOn() {
-			time = sdf.format(new Date());
-			history.setON(true);
-			history.setONTIME(time);
-			/*
-			 * 设置发送内容的对话框
-			*/
-			setSendContent("设置on指令携带的信息:",1);
-			tv_status.setText("on");
-			tv_time.setText(time);
+		public void doOpenDevice() {
+			massageUtil.send("opendevice");
+			setPromptText("opendevice");
 		}
 
-		public void doOff() {
-			time = sdf.format(new Date());
-			history.setOFF(true);
-			history.setOFFTIME(time);
-			/*
-			 * 设置发送内容的对话框
-			*/
-			setSendContent("设置off指令携带的信息:",-1);
-			tv_status.setText("off");
-			tv_time.setText(time);
+		public void doOpenLed1() {
+			massageUtil.send("opendled1");
+			setPromptText("opendled1");
 		}
-		
-		
-		public void setSendContent(String title, final int flag){
-			final EditText et = new EditText(Switcher.this);
-			et.setMaxWidth(20);
-			et.setSelectAllOnFocus(true);
-			if(flag ==1){
-			et.setText(history.getONCONTENT());
-			}
-			else{
-				et.setText(history.getOFFCONTENT());
-			}
-			et.setInputType(InputType.TYPE_CLASS_TEXT);
-			builder = new AlertDialog.Builder(Switcher.this);
-			builder.setTitle(title);
-			builder.setView(et);
-			builder.setPositiveButton("send",
-					new DialogInterface.OnClickListener() {
 
-						public void onClick(DialogInterface arg0, int arg1) {
-							// TODO Auto-generated method stub
-							if(flag ==1){
-							history.setONCONTENT(et.getText().toString());
-							tv_content.setText(history.getONCONTENT());
-							new MassageUtil(Switcher.this).send(history.getONCONTENT());
-							}else{
-								history.setOFFCONTENT(et.getText().toString());
-								tv_content.setText(history.getOFFCONTENT());
-								new MassageUtil(Switcher.this).send(history.getOFFCONTENT());
-							}
-						}
-					});
-			builder.setNegativeButton("cancel", null);
-			builder.create().show();
+		public void doOpenLed2() {
+			History.OPEN2 = true;
+			massageUtil.send("opendled2");
+			setPromptText("opendled2");
+		}
+
+		public void doOpenLed3() {
+			History.OPEN3 = true;
+			massageUtil.send("opendled3");
+			setPromptText("opendled3");
+		}
+
+		public void doOpenLed4() {
+			History.OPEN4 = true;
+			massageUtil.send("opendled4");
+			setPromptText("opendled4");
+		}
+
+		public void doCloseDevice() {
+			History.CLOSEDEVICE = true;
+			massageUtil.send("closedevice");
+			setPromptText("closedevice");
+		}
+
+		public void doCloseLed1() {
+			History.CLOSE1 = true;
+			massageUtil.send("closeled1");
+			setPromptText("closeled1");
+		}
+
+		public void doCloseLed2() {
+			History.CLOSE2 = true;
+			massageUtil.send("closeled2");
+			setPromptText("closeled2");
+		}
+
+		public void doCloseLed3() {
+			History.CLOSE3 = true;
+			massageUtil.send("closeled3");
+			setPromptText("closeled3");
+		}
+
+		public void doCloseLed4() {
+			History.CLOSE4 = true;
+			massageUtil.send("closeled4");
+			setPromptText("closeled4");
+		}
+
+		public void doStatus() {
+			History.STATUS = true;
+			massageUtil.send("status");
+			setPromptText("status");
+		}
+
+		public void doResetPrompt() {
+			builder = new StringBuilder();
+			prompt.setText("");
+		}
+
+		public void setPromptText(String text) {
+			builder.append(text + "\n");
+			prompt.setText(builder.toString());
 		}
 	}
 }

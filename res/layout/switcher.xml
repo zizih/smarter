@@ -13,17 +13,135 @@
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <Button
+        <LinearLayout
             android:id="@+id/on"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="on*" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-        <Button
+            <Button
+                android:id="@+id/opendevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bu_bg_green"
+                android:hint="open device*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/open1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="openled1*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/open2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="openled2*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/open3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="openled3*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/open4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="openled4*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="off*" />
+            android:layout_marginLeft="3dip"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/closedevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bu_bg_green"
+                android:hint="close device*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/close1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="closeled1*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/close2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="closeled2*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/close3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="closeled3*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/close4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="closeled4*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/status_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bu_bg_green"
+                android:hint="status*"
+                android:padding="5dip"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -33,47 +151,46 @@
         android:orientation="horizontal"
         android:padding="10dip" >
 
-        <TextView
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="status：" />
-
         <LinearLayout
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <TextView
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="prompt："
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/reset_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dip"
+                android:background="@drawable/bu_bg_green"
+                android:hint="reset prompt"
+                android:padding="5dip"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
             android:padding="10dip" >
 
             <TextView
-                android:id="@+id/status_view"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_border"
-                android:hint="you have&apos;t set any status"
-                android:lines="2"
-                android:padding="5dip" />
-
-            <TextView
-                android:id="@+id/time_view"
+                android:id="@+id/prompt_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dip"
                 android:background="@drawable/bg_border"
-                android:hint="00-00-00 00:00:00"
-                android:lines="2"
+                android:hint="..."
                 android:padding="5dip" />
-
-            <TextView
-                android:id="@+id/content_view"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dip"
-                android:background="@drawable/bg_border"
-                android:hint="no content"
-                android:lines="2"
-                android:padding="5dip" />
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

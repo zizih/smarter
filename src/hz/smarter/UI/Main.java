@@ -2,7 +2,6 @@ package hz.smarter.UI;
 
 import hz.smarter.R;
 import hz.smarter.Model.History;
-import hz.smarter.Model.HistorySingleton;
 import hz.smarter.Util.DbHelper;
 import android.app.ActivityGroup;
 import android.app.AlertDialog;
@@ -35,20 +34,15 @@ public class Main extends ActivityGroup {
 				.setContent(new Intent(this, Timing.class)));
 		tabHost.addTab(tabHost.newTabSpec("phone").setIndicator("号码")
 				.setContent(new Intent(this, Phone.class)));
-		tabHost.addTab(tabHost.newTabSpec("saveAndHistory")
-				.setIndicator("历史记录")
-				.setContent(new Intent(this, SaveHistory.class)));
 		tabHost.setCurrentTab(0);
+		
+		
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		DbHelper dbHelper = new DbHelper(Main.this);
-		History history = HistorySingleton.getHistoryInstance();
-		history = dbHelper.getLastHistory(dbHelper.getWritableDatabase());
-		dbHelper.close();
 	}
 
 	@Override
